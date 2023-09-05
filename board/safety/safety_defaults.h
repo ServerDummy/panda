@@ -28,9 +28,20 @@ static int nooutput_tx_lin_hook(int lin_num, uint8_t *data, int len) {
 }
 
 static int default_fwd_hook(int bus_num, CANPacket_t *to_fwd) {
-  UNUSED(bus_num);
-  UNUSED(to_fwd);
-  return -1;
+  int addr = GET_ADDR(to_fwd);
+  int bus_fwd = -1;
+  
+  if (bus_num == 0) {
+    bus_fwd = 1;
+    if (addr == 0000) {
+      
+    }
+    
+  }
+  if (bus_num == 1) {
+    bus_fwd = 0;
+  }
+  return bus_fwd;
 }
 
 const safety_hooks nooutput_hooks = {
